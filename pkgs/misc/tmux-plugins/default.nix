@@ -601,7 +601,7 @@ in rec {
       owner = "christoomey";
       repo = "vim-tmux-navigator";
       rev = "afb45a55b452b9238159047ce7c6e161bd4a9907";
-      sha256 = "9999999999999999999999999999999999999999999999999999";
+      sha256 = "8A+Yt9uhhAP76EiqUopE8vl7/UXkgU2x000EOcF7pl0=";
     };
   };
 
