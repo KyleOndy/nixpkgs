@@ -5,10 +5,10 @@ stdenvNoCC.mkDerivation rec {
   version = "4.12.0";
 
   src = fetchFromGitHub {
-    owner = "denysdovhan";
+    owner = "kyleondy";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-ZL6z5pj2xbnUZl4SK7wxiJjheUY79hwDNVYm9+biKZU=";
+    rev = "bump-async";
+    sha256 = "sha256-hJWgOcsYnyY+EyFSnfhDro16RjSSDFOeg6M2luA3r3g=";
   };
 
   strictDeps = true;
