@@ -198,7 +198,29 @@ in
         # Prevents missing snapshots during DST changes
         environment.TZ = "UTC";
         after = [ "zfs.target" ];
+        wants = [ "sanoid-prune.service" ];
+        before = [ "sanoid-prune.service" ];
         startAt = cfg.interval;
+      };
+      sanoid-prune = {
+        description = "Cleanup ZFS Pool";
+        serviceConfig = {
+          ExecStart = lib.escapeShellArgs ([
+            "${cfg.package}/bin/sanoid"
+            "--prune-snapshots"
+            "--configdir"
+            (pkgs.writeTextDir "sanoid.conf" configFile)
+          ] ++ cfg.extraArgs);
+          User = "sanoid";
+          Group = "sanoid";
+          DynamicUser = true;
+          RuntimeDirectory = "sanoid";
+          CacheDirectory = "sanoid";
+        };
+        # Prevents missing snapshots during DST changes
+        environment.TZ = "UTC";
+        after = [ "zfs.target" "sanoid.target" ];
+        requires = [ "zfs.target" ];
       };
     };
   };
