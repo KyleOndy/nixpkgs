@@ -205,6 +205,9 @@ in
       sanoid-prune = {
         description = "Cleanup ZFS Pool";
         serviceConfig = {
+          # TODO: do we need snapshot permission?
+          ExecStartPre = (map (buildAllowCommand "allow" [ "snapshot" "mount" "destroy" ]) datasets);
+          ExecStopPost = (map (buildAllowCommand "unallow" [ "snapshot" "mount" "destroy" ]) datasets);
           ExecStart = lib.escapeShellArgs ([
             "${cfg.package}/bin/sanoid"
             "--prune-snapshots"
